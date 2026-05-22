@@ -3,522 +3,247 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>すぐくる LINE公式アカウント 確認・返信マニュアル</title>
+  <title>すぐくる LINE公式アカウント 操作マニュアル</title>
   <style>
     :root {
-      --line: #06c755;
-      --line-dark: #04a646;
+      --green: #06c755;
+      --deep: #123225;
       --ink: #172026;
-      --muted: #5f6f78;
-      --paper: #ffffff;
-      --soft: #f3f8f5;
-      --border: #dbe8df;
-      --accent: #ffe08a;
+      --muted: #5d6b64;
+      --bg: #f5faf7;
+      --card: #fff;
+      --line: #d9ebe0;
+      --warn: #fff5d6;
     }
-
-    * {
-      box-sizing: border-box;
-    }
-
+    * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans JP", sans-serif;
       color: var(--ink);
-      background: #f7faf8;
-      line-height: 1.75;
+      background: var(--bg);
+      line-height: 1.8;
     }
-
-    .hero {
-      background: linear-gradient(135deg, #e9fff2 0%, #ffffff 58%, #f3fff7 100%);
-      border-bottom: 1px solid var(--border);
+    header {
+      background: var(--green);
+      color: #fff;
+      padding: 44px 18px;
     }
-
     .wrap {
-      width: min(1040px, calc(100% - 32px));
+      width: min(920px, calc(100% - 32px));
       margin: 0 auto;
     }
-
-    .hero-inner {
-      min-height: 440px;
-      display: grid;
-      grid-template-columns: 1.08fr 0.92fr;
-      gap: 40px;
-      align-items: center;
-      padding: 54px 0 44px;
-    }
-
-    .eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 12px;
+    .label {
+      display: inline-block;
+      padding: 5px 12px;
+      border: 1px solid rgba(255,255,255,.55);
       border-radius: 999px;
-      background: #e2f9ea;
-      color: #087233;
       font-size: 14px;
       font-weight: 700;
+      margin-bottom: 16px;
     }
-
     h1 {
-      margin: 18px 0 16px;
-      font-size: clamp(30px, 5vw, 52px);
-      line-height: 1.18;
+      margin: 0 0 14px;
+      font-size: clamp(28px, 5vw, 46px);
+      line-height: 1.25;
       letter-spacing: 0;
     }
-
     .lead {
       margin: 0;
-      color: var(--muted);
+      max-width: 760px;
       font-size: 18px;
-      max-width: 680px;
+      opacity: .96;
     }
-
-    .hero-points {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .point {
-      background: var(--paper);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px;
-      font-weight: 700;
-      font-size: 14px;
-    }
-
-    .phone {
-      width: min(360px, 100%);
-      margin-left: auto;
-      background: #111;
-      border-radius: 34px;
-      padding: 12px;
-      box-shadow: 0 28px 70px rgba(4, 86, 38, 0.2);
-    }
-
-    .phone-screen {
-      overflow: hidden;
-      background: #fbfffc;
-      border-radius: 24px;
-      min-height: 520px;
-      border: 1px solid #202020;
-    }
-
-    .app-top {
-      background: var(--line);
-      color: white;
-      padding: 18px;
-      font-weight: 800;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .account {
-      padding: 18px;
-      border-bottom: 1px solid var(--border);
-      display: flex;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .avatar {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background: #101820;
-      position: relative;
-    }
-
-    .avatar::after {
-      content: "";
-      position: absolute;
-      inset: 11px;
-      border-radius: 50%;
-      background: var(--accent);
-    }
-
-    .account strong {
-      display: block;
-      line-height: 1.25;
-    }
-
-    .account span {
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .chat-list {
-      padding: 14px;
-    }
-
-    .chat-item {
-      display: grid;
-      grid-template-columns: 42px 1fr auto;
-      gap: 10px;
-      align-items: center;
-      padding: 12px 4px;
-      border-bottom: 1px solid #edf3ef;
-    }
-
-    .mini {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      background: #ffcf8c;
-    }
-
-    .chat-item b {
-      display: block;
-      font-size: 15px;
-    }
-
-    .chat-item small {
-      color: var(--muted);
-      display: block;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 160px;
-    }
-
-    .badge {
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      background: #ff4d4d;
-      color: #fff;
-      font-size: 12px;
-      display: grid;
-      place-items: center;
-      font-weight: 800;
-    }
-
+    main { padding: 28px 0 56px; }
     section {
-      padding: 54px 0;
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 24px;
+      margin: 18px 0;
     }
-
     h2 {
-      margin: 0 0 18px;
-      font-size: 28px;
+      margin: 0 0 14px;
+      color: var(--deep);
+      font-size: 25px;
       line-height: 1.35;
       letter-spacing: 0;
     }
-
-    .section-lead {
-      color: var(--muted);
-      max-width: 760px;
-      margin: 0 0 26px;
+    h3 {
+      margin: 22px 0 8px;
+      font-size: 18px;
+      color: var(--deep);
+      letter-spacing: 0;
     }
-
-    .steps {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 16px;
+    p { margin: 0 0 12px; }
+    ol, ul { margin: 0; padding-left: 1.35em; }
+    li + li { margin-top: 8px; }
+    .box {
+      background: #effaf3;
+      border-left: 6px solid var(--green);
+      padding: 14px 16px;
+      border-radius: 6px;
+      margin: 14px 0;
     }
-
-    .step {
-      background: var(--paper);
-      border: 1px solid var(--border);
+    .warn {
+      background: var(--warn);
+      border: 1px solid #f0d980;
+      padding: 14px 16px;
       border-radius: 8px;
-      padding: 18px;
-      min-height: 260px;
+      margin: 14px 0;
     }
-
+    .step {
+      display: grid;
+      grid-template-columns: 52px 1fr;
+      gap: 14px;
+      padding: 18px 0;
+      border-top: 1px solid #edf4ef;
+    }
+    .step:first-of-type { border-top: 0; }
     .num {
-      width: 34px;
-      height: 34px;
+      width: 42px;
+      height: 42px;
       border-radius: 50%;
-      background: var(--line);
-      color: white;
+      background: var(--green);
+      color: #fff;
       display: grid;
       place-items: center;
-      font-weight: 900;
-      margin-bottom: 12px;
-    }
-
-    .step h3 {
-      margin: 0 0 10px;
-      font-size: 18px;
-      line-height: 1.45;
-    }
-
-    .step p {
-      margin: 0;
-      color: var(--muted);
-      font-size: 15px;
-    }
-
-    .mock {
-      height: 88px;
-      border-radius: 8px;
-      border: 1px solid var(--border);
-      background: var(--soft);
-      margin-bottom: 14px;
-      padding: 10px;
-      display: grid;
-      gap: 7px;
-    }
-
-    .bar {
-      height: 12px;
-      border-radius: 999px;
-      background: #c8ead4;
-    }
-
-    .bar.short {
-      width: 56%;
-    }
-
-    .bar.line {
-      background: var(--line);
-      width: 72%;
-    }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 22px;
-    }
-
-    .panel {
-      background: var(--paper);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 24px;
-    }
-
-    .panel h3 {
-      margin: 0 0 12px;
+      font-weight: 800;
       font-size: 20px;
     }
-
-    ul {
-      margin: 0;
-      padding-left: 1.25em;
+    .step h3 { margin-top: 0; }
+    code {
+      background: #eef5f0;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-family: "Consolas", "Noto Sans JP", monospace;
     }
-
-    li + li {
-      margin-top: 8px;
-    }
-
-    .copy {
-      background: #102018;
-      color: #ecfff3;
-      border-radius: 8px;
-      padding: 18px;
+    .template {
       white-space: pre-wrap;
-      font-family: "Yu Gothic", "Noto Sans JP", sans-serif;
-      line-height: 1.8;
-      font-size: 15px;
-    }
-
-    .note {
-      background: #fff9e8;
-      border: 1px solid #f2d990;
+      background: #102018;
+      color: #f0fff5;
+      padding: 16px;
       border-radius: 8px;
-      padding: 18px;
+      font-size: 15px;
+      line-height: 1.8;
+      overflow-wrap: anywhere;
     }
-
     footer {
-      padding: 30px 0 50px;
       color: var(--muted);
-      font-size: 14px;
       text-align: center;
-    }
-
-    @media (max-width: 860px) {
-      .hero-inner,
-      .two-col {
-        grid-template-columns: 1fr;
-      }
-
-      .phone {
-        margin: 0 auto;
-      }
-
-      .steps {
-        grid-template-columns: 1fr;
-      }
-
-      .hero-points {
-        grid-template-columns: 1fr;
-      }
+      font-size: 14px;
+      padding: 18px 0 34px;
     }
   </style>
 </head>
 <body>
-  <header class="hero">
-    <div class="wrap hero-inner">
-      <div>
-        <span class="eyebrow">すぐくる LINE公式アカウント</span>
-        <h1>スマホで問い合わせを確認・返信する方法</h1>
-        <p class="lead">
-          LINE公式アカウントに問い合わせが来たとき、スマホで確認して返信するための簡単マニュアルです。
-          操作感は、通常のLINEやメール返信に近いです。
-        </p>
-        <div class="hero-points">
-          <div class="point">通知で気づける</div>
-          <div class="point">スマホで返信できる</div>
-          <div class="point">問い合わせ履歴が残る</div>
-        </div>
-      </div>
-
-      <div class="phone" aria-label="スマホ画面イメージ">
-        <div class="phone-screen">
-          <div class="app-top">
-            <span>LINE公式アカウント</span>
-            <span>通知ON</span>
-          </div>
-          <div class="account">
-            <div class="avatar"></div>
-            <div>
-              <strong>すぐくる</strong>
-              <span>害虫駆除（さいたま）</span>
-            </div>
-          </div>
-          <div class="chat-list">
-            <div class="chat-item">
-              <div class="mini"></div>
-              <div>
-                <b>お客様</b>
-                <small>見積もりについて相談したいです</small>
-              </div>
-              <div class="badge">1</div>
-            </div>
-            <div class="chat-item">
-              <div class="mini"></div>
-              <div>
-                <b>新規問い合わせ</b>
-                <small>トビムシの動画を見ました</small>
-              </div>
-              <div></div>
-            </div>
-            <div class="chat-item">
-              <div class="mini"></div>
-              <div>
-                <b>相談履歴</b>
-                <small>写真を送ります</small>
-              </div>
-              <div></div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <header>
+    <div class="wrap">
+      <div class="label">すぐくる総合リビングサービス</div>
+      <h1>LINE公式アカウント<br>スマホ確認・返信マニュアル</h1>
+      <p class="lead">
+        LINE公式アカウントに問い合わせが来たとき、スマホで通知を確認し、チャットを開いて対応するための簡単な手順です。
+      </p>
     </div>
   </header>
 
-  <main>
+  <main class="wrap">
     <section>
-      <div class="wrap">
-        <h2>最初にやること</h2>
-        <p class="section-lead">招待URLを承認して、スマホアプリで通知を受け取れる状態にします。</p>
-
-        <div class="steps">
-          <article class="step">
-            <div class="num">1</div>
-            <div class="mock">
-              <div class="bar line"></div>
-              <div class="bar"></div>
-              <div class="bar short"></div>
-            </div>
-            <h3>アプリを入れる</h3>
-            <p>App Store または Google Play で「LINE公式アカウント」と検索してインストールします。</p>
-          </article>
-
-          <article class="step">
-            <div class="num">2</div>
-            <div class="mock">
-              <div class="bar"></div>
-              <div class="bar line"></div>
-              <div class="bar short"></div>
-            </div>
-            <h3>招待URLを開く</h3>
-            <p>送られてきた招待URLを開き、すぐくるアカウントへの参加を承認します。URLは24時間で期限切れになります。</p>
-          </article>
-
-          <article class="step">
-            <div class="num">3</div>
-            <div class="mock">
-              <div class="bar short"></div>
-              <div class="bar"></div>
-              <div class="bar line"></div>
-            </div>
-            <h3>アカウントを開く</h3>
-            <p>アプリ内で「すぐくる｜害虫駆除（さいたま）」を選びます。</p>
-          </article>
-
-          <article class="step">
-            <div class="num">4</div>
-            <div class="mock">
-              <div class="bar line"></div>
-              <div class="bar"></div>
-              <div class="bar short"></div>
-            </div>
-            <h3>通知をONにする</h3>
-            <p>問い合わせに気づけるよう、スマホ側の通知をONにします。</p>
-          </article>
-        </div>
+      <h2>最初に知っておくこと</h2>
+      <div class="box">
+        <p><strong>普段の問い合わせ確認は、スマホの「LINE公式アカウント」アプリで見るのが一番わかりやすいです。</strong></p>
+        <p>PC版は設定や長文入力には便利ですが、日常の問い合わせ確認はスマホの方が見やすいです。</p>
       </div>
+      <ul>
+        <li>通常のLINEアプリとは別に、管理用の <strong>「LINE公式アカウント」</strong> アプリを使います。</li>
+        <li>問い合わせが来ると、スマホに通知が出ます。</li>
+        <li>アプリ下部の <strong>「チャット」</strong> に赤い未読マークや件数が表示されます。</li>
+        <li>返信文面は、御社で通常使われている対応方法・文面を優先してください。</li>
+      </ul>
     </section>
 
-    <section style="background: #eef8f1;">
-      <div class="wrap">
-        <h2>問い合わせが来たとき</h2>
-        <div class="two-col">
-          <div class="panel">
-            <h3>確認の流れ</h3>
-            <ul>
-              <li>スマホに通知が届いたらアプリを開く</li>
-              <li>未読のチャットを開く</li>
-              <li>お客様の地域・内容・写真の有無を確認する</li>
-              <li>必要に応じて電話や現地調査につなげる</li>
-            </ul>
-          </div>
+    <section>
+      <h2>参加までの手順</h2>
 
-          <div class="panel">
-            <h3>動画番号について</h3>
-            <p>
-              動画説明欄には「お問い合わせ時に動画番号をお伝えください」と記載しています。
-              ただし、番号を書かずに問い合わせされる方も多いと思います。
-            </p>
-            <p>
-              必要に応じて「どの動画をご覧になったか」を返信時に確認してください。
-            </p>
+      <div class="step">
+        <div class="num">1</div>
+        <div>
+          <h3>スマホに「LINE公式アカウント」アプリを入れる</h3>
+          <p>App Store または Google Play を開き、検索欄に <code>LINE公式アカウント</code> と入力してください。</p>
+          <p>表示された管理用アプリをインストールします。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">2</div>
+        <div>
+          <h3>アプリを開いてログインする</h3>
+          <p>インストール後、アプリを開きます。</p>
+          <p>案内に沿って、普段使っているLINEアカウント、またはビジネスIDでログインしてください。</p>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">3</div>
+        <div>
+          <h3>招待URLをスマホで開く</h3>
+          <p>Chatworkで届いた招待URLを、スマホでタップしてください。</p>
+          <p>画面の案内に沿って、すぐくるLINE公式アカウントへの参加を承認します。</p>
+          <div class="warn">
+            <strong>注意:</strong> 招待URLは24時間で期限が切れます。届いたら早めに承認してください。
           </div>
+        </div>
+      </div>
+
+      <div class="step">
+        <div class="num">4</div>
+        <div>
+          <h3>アプリで「すぐくる」アカウントを開く</h3>
+          <p>承認後、「LINE公式アカウント」アプリを開きます。</p>
+          <p>管理できるアカウント一覧に <strong>「すぐくる｜害虫駆除（さいたま）」</strong> が表示されるので、それを押してください。</p>
         </div>
       </div>
     </section>
 
     <section>
-      <div class="wrap">
-        <h2>返信文面について</h2>
-        <p class="section-lead">
-          実際の返信は、御社で通常使われている問い合わせ対応方法・返信文面を優先してください。
-          ここではLINE対応の流れをイメージしやすいよう、確認ポイントだけまとめています。
-        </p>
-        <div class="panel">
-          <h3>聞けるとよいこと</h3>
-          <ul>
-            <li>お住まいの地域</li>
-            <li>発生している虫、または害獣の種類</li>
-            <li>発生場所（室内、浴室、床下、屋根裏、庭など）</li>
-            <li>いつ頃から発生しているか</li>
-            <li>写真が送れるか</li>
-            <li>お電話可能な時間帯</li>
-            <li>どの動画を見て問い合わせたか</li>
-          </ul>
-        </div>
+      <h2>問い合わせが来たときの見方</h2>
+      <ol>
+        <li>スマホに通知が来たら、<strong>「LINE公式アカウント」</strong> アプリを開く</li>
+        <li>すぐくるのアカウントを開く</li>
+        <li>画面下部の <strong>「チャット」</strong> を押す</li>
+        <li>未読のチャットに赤いマーク、または未読件数が出ているので押す</li>
+        <li>お客様からのメッセージを確認する</li>
+        <li>必要に応じて返信、電話、現地調査につなげる</li>
+      </ol>
+      <div class="box">
+        <p><strong>感覚としては、通常のLINEやメール問い合わせへの返信に近いです。</strong></p>
       </div>
     </section>
 
-    <section style="background: #f8fbf9;">
-      <div class="wrap">
-        <h2>今回のお客様への返信案</h2>
-        <p class="section-lead">見積もり後に「今回は見送り」とご連絡いただいた場合の、丁寧な返信例です。</p>
-        <div class="copy">荒川様
+    <section>
+      <h2>返信時に確認できるとよいこと</h2>
+      <p>すべてを最初から聞く必要はありません。まずは対応に必要な情報から確認してください。</p>
+      <ul>
+        <li>お住まいの地域</li>
+        <li>発生している虫、または害獣の種類</li>
+        <li>発生場所（室内、浴室、床下、屋根裏、庭など）</li>
+        <li>いつ頃から発生しているか</li>
+        <li>写真が送れるか</li>
+        <li>お電話可能な時間帯</li>
+        <li>どの動画を見て問い合わせたか</li>
+      </ul>
+
+      <h3>動画番号について</h3>
+      <p>動画説明欄には「お問い合わせ時に動画番号をお伝えください」と記載しています。</p>
+      <p>ただし、実際には番号を書かずに問い合わせされる方も多いと思います。</p>
+      <p>必要に応じて、返信時に以下のように確認してください。</p>
+      <div class="template">差し支えなければ、どの動画をご覧になってお問い合わせいただいたか、
+動画番号または動画の内容を教えていただけますでしょうか。</div>
+    </section>
+
+    <section>
+      <h2>今回のお客様への返信案</h2>
+      <p>お見積もり後に「今回は見送り」とご連絡いただいた場合の返信案です。</p>
+      <div class="template">荒川様
 
 ご丁寧にご連絡いただきありがとうございます。
 すぐくる総合リビングサービスです。
@@ -531,22 +256,17 @@
 また状況が変わったり、再発・悪化などでお困りの際は、いつでもお気軽にご相談ください。
 
 このたびはお問い合わせいただき、誠にありがとうございました。</div>
-      </div>
     </section>
 
     <section>
-      <div class="wrap">
-        <div class="note">
-          <strong>PC版を使う場合</strong><br>
-          PC版のLINE Official Account Managerでは、上部メニューの「チャット」を開くと、お客様とのやり取りを確認できます。
-          日常対応はスマホアプリの方が分かりやすいです。
-        </div>
-      </div>
+      <h2>PC版で見る場合</h2>
+      <p>PC版のLINE Official Account Managerでは、上部メニューの <strong>「チャット」</strong> を押すと、お客様とのやり取りを確認できます。</p>
+      <p>ホーム画面では問い合わせ本文が見えにくいため、問い合わせ確認は必ず <strong>「チャット」</strong> を開いてください。</p>
     </section>
   </main>
 
   <footer>
-    すぐくる総合リビングサービス LINE公式アカウント運用メモ
+    すぐくる LINE公式アカウント 操作マニュアル
   </footer>
 </body>
 </html>
